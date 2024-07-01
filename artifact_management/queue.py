@@ -1,5 +1,8 @@
 import sys  
-sys.path.append("E:\Cultural") 
+import os
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.append(project_root)
 import unittest
 from artifact_management.artifact import Significance
 

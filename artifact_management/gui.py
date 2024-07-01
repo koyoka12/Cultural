@@ -1,9 +1,12 @@
 import sys  
-sys.path.append("E:\Cultural")  
+import os
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.append(project_root)
 import tkinter as tk
 from tkinter import ttk
 from artifact_management.manager import CulturalHeritageSiteManager
-
+from artifact_management.artifact import Artifact
 def main():
     manager = CulturalHeritageSiteManager()
     manager.load_artifacts()

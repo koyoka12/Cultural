@@ -2,5 +2,5 @@ group_id,arrival_time,reservation_priority
 1,9:00,HIGH
 2,9:30,MEDIUM
 3,10:00,LOW
-4,10:30,HIGH
-5,11:00,MEDIUM
+4,11:00,MEDIUM
+5,10:30,HIGH

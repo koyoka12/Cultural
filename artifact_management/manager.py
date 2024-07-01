@@ -1,12 +1,16 @@
 import sys
+import os
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.append(project_root)
 import pandas as pd
 from artifact_management.artifact_tree import ArtifactTree
 from artifact_management.visitors import VisitorGroup, Significance
 from artifact_management.queue import TourQueue
 from artifact_management.artifact import Artifact, ArtifactType
 
-# 添加项目目录到 sys.path，确保只执行一次
-sys.path.append("E:\\Cultural")
+from artifact_management.artifact import Artifact
+
 
 class CulturalHeritageSiteManager:
     def __init__(self):
@@ -14,7 +18,7 @@ class CulturalHeritageSiteManager:
         self.tour_queue = TourQueue()
 
     def load_artifacts(self):
-        file_path = "E:\\Cultural\\file\\cultural_heritage_artifacts.csv"
+        file_path = "file/cultural_heritage_artifacts.csv"
         try:
             data = pd.read_csv(file_path)
             for _, row in data.iterrows():
@@ -40,7 +44,7 @@ class CulturalHeritageSiteManager:
             print(f"An error occurred: {e}")
 
     def load_visitors(self):
-        file_path = "E:\\Cultural\\file\\cultural_heritage_visitors.csv"
+        file_path = "file/cultural_heritage_visitors.csv"
         try:
             data = pd.read_csv(file_path)
             for _, row in data.iterrows():

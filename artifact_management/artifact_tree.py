@@ -1,7 +1,7 @@
 import enum
 
+from artifact_management.artifact import Artifact
 
-from artifact import Artifact
 
 class ArtifactTreeNode:
     def __init__(self, artifact):
