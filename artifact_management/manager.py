@@ -11,10 +11,24 @@ from artifact_management.artifact import Artifact, ArtifactType
 
 from artifact_management.artifact import Artifact
 
+import sys
+import os
+import pandas as pd
+from enum import Enum
+
+# 假设这些枚举和类在相应的文件中定义，并被正确导入
+from artifact_management.artifact import Artifact, ArtifactType
+from artifact_management.visitors import VisitorGroup, Significance
+from artifact_management.queue import TourQueue
+
+# 确保项目根目录在 sys.path 中
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.append(project_root)
 
 class CulturalHeritageSiteManager:
     def __init__(self):
-        self.artifact_tree = ArtifactTree()
+        self.artifact_tree = {}  # 使用字典来存储文物，键为 artifact_id
         self.tour_queue = TourQueue()
 
     def load_artifacts(self):
@@ -22,18 +36,17 @@ class CulturalHeritageSiteManager:
         try:
             data = pd.read_csv(file_path)
             for _, row in data.iterrows():
-                # 假设 CSV 文件中的 artifact_type 列包含的是数字，对应 ArtifactType 枚举的成员
-                artifact_type_value = int(row['artifact_type'])
-                artifact_type = ArtifactType(artifact_type_value)  # 根据数字访问枚举成员
-
+                artifact_type_name = row['artifact_type'].strip()
+                artifact_type = ArtifactType[artifact_type_name]
+                
                 artifact = Artifact(
                     row['artifact_id'],
                     row['name'],
                     row['era'],
                     Significance[row['significance'].strip()],
-                    artifact_type  # 使用访问得到的枚举成员
+                    artifact_type
                 )
-                self.artifact_tree.add_artifact(artifact)
+                self.artifact_tree[artifact.artifact_id] = artifact
         except FileNotFoundError:
             print(f"The file {file_path} was not found.")
         except pd.errors.EmptyDataError:
@@ -62,48 +75,44 @@ class CulturalHeritageSiteManager:
             print(f"An error occurred: {e}")
 
     def display_artifacts_tree(self):
-        # 假设实现，您需要根据 ArtifactTree 类的实际实现来填充
-        print("Artifacts tree display logic here.")
+        for artifact_id, artifact in self.artifact_tree.items():
+            print(f"Artifact ID: {artifact_id}, {artifact}")
 
     def display_visitor_queue(self):
-        # 假设实现，您需要根据 TourQueue 类的实际实现来填充
+        print("Visitor Queue:")
         for group in self.tour_queue.queue:
             print(group)
 
     def remove_artifact(self, artifact_id):
-        # 假设实现，您需要根据 ArtifactTree 类的实际实现来填充
-        print(f"Remove artifact logic with ID {artifact_id}.")
+        if artifact_id in self.artifact_tree:
+            del self.artifact_tree[artifact_id]
+            print(f"Artifact with ID {artifact_id} has been removed.")
+        else:
+            print(f"No artifact found with ID {artifact_id}.")
 
     def remove_visitor_group(self):
-        # 假设实现，您需要根据 TourQueue 类的实际实现来填充
-        print("Remove visitor group logic from queue.")
+        if self.tour_queue.queue:
+            removed_group = self.tour_queue.queue.pop(0)
+            print(f"Visitor group removed: {removed_group}")
 
 def main():
-    # 创建文化遗产遗址管理器实例
     manager = CulturalHeritageSiteManager()
-    
-    # 加载文物和游客数据
     manager.load_artifacts()
     manager.load_visitors()
 
-    # 显示初始状态
     print("Initial Artifacts Tree:")
     manager.display_artifacts_tree()
+
     print("\nInitial Visitor Queue:")
     manager.display_visitor_queue()
 
-    # 执行操作，例如删除文物和游客组
-    artifact_id_to_remove = 1  # 示例文物 ID
-    manager.remove_artifact(artifact_id_to_remove)
-    print(f"\nArtifact with ID {artifact_id_to_remove} has been removed.")
-
-    # 从队列中移除一个游客组
+    # 删除操作
+    manager.remove_artifact(1)
     manager.remove_visitor_group()
-    print("\nA visitor group has been removed from the queue.")
 
-    # 显示操作后的状态
     print("\nFinal Artifacts Tree:")
     manager.display_artifacts_tree()
+
     print("\nFinal Visitor Queue:")
     manager.display_visitor_queue()
 
