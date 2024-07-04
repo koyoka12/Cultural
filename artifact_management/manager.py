@@ -80,7 +80,7 @@ class CulturalHeritageSiteManager:
         self.artifacts = []
         self.visitor_queue = []
 
-    def load_artifacts(self, filename=r"E:\jiedang\第一单\file\cultural_heritage_artifacts.csv"):
+    def load_artifacts(self, filename=r"file/cultural_heritage_artifacts.csv"):
         data = pd.read_csv(filename)
         for _, row in data.iterrows():
             significance_name = row['significance'].strip()
@@ -99,7 +99,7 @@ class CulturalHeritageSiteManager:
         for artifact in sorted(self.artifacts, key=lambda x: (x.era, x.significance.value, x.artifact_type.value)):
             print(artifact)
 
-    def load_visitors(self, filename=r"E:\jiedang\第一单\file\cultural_heritage_visitors.csv"):
+    def load_visitors(self, filename=r"file/cultural_heritage_visitors.csv"):
         data = pd.read_csv(filename)
         for _, row in data.iterrows():
             preference = row['preference'].strip() if 'preference' in row and pd.notna(row['preference']) else None
