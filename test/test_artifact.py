@@ -1,14 +1,15 @@
 import sys
 import os
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(current_dir)
-sys.path.append(project_root)
 import unittest
 from artifact_management.artifact import Artifact, ArtifactType, Significance
 from artifact_management.visitors import VisitorGroup
 from artifact_management.artifact_tree import ArtifactTree
-from artifact_management.queue import TourQueue 
+from artifact_management.queue import TourQueue
 import time
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.append(project_root)
 
 class TestArtifactTree(unittest.TestCase):
     def setUp(self):
@@ -38,6 +39,15 @@ class TestArtifactTree(unittest.TestCase):
         found = self.tree.search_artifacts_by_type_and_significance(ArtifactType.PAINTING, Significance.MEDIUM)
         self.assertEqual(len(found), 1)
         self.assertEqual(found[0].artifact_id, 2)
+
+    def test_search_artifacts_by_era(self):
+        artifact1 = Artifact(1, "Artifact1", "Era1", "HIGH", "SCULPTURE")
+        artifact2 = Artifact(2, "Artifact2", "Era2", "MEDIUM", "PAINTING")
+        self.tree.add_artifact(artifact1)
+        self.tree.add_artifact(artifact2)
+        found = self.tree.search_artifacts_by_era("Era1")
+        self.assertEqual(len(found), 1)
+        self.assertEqual(found[0].artifact_id, 1)
 
 class TestTourQueue(unittest.TestCase):
     def setUp(self):

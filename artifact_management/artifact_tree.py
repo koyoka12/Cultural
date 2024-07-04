@@ -1,7 +1,4 @@
-import enum
-
 from artifact_management.artifact import Artifact
-
 
 class ArtifactTreeNode:
     def __init__(self, artifact):
@@ -73,9 +70,20 @@ class ArtifactTree:
             self._search_helper(node.left, artifact_type, significance, found_artifacts)
             self._search_helper(node.right, artifact_type, significance, found_artifacts)
 
+    def search_artifacts_by_era(self, era):
+        found_artifacts = []
+        self._search_by_era_helper(self.root, era, found_artifacts)
+        return found_artifacts
+
+    def _search_by_era_helper(self, node, era, found_artifacts):
+        if node is not None:
+            if node.artifact.era == era:
+                found_artifacts.append(node.artifact)
+            self._search_by_era_helper(node.left, era, found_artifacts)
+            self._search_by_era_helper(node.right, era, found_artifacts)
+
     def display(self, node=None, level=0):
         if node is not None:
             self.display(node.right, level + 1)
             print(' ' * (level * 4) + str(node.artifact))
             self.display(node.left, level + 1)
-

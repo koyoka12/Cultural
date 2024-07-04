@@ -1,0 +1,12 @@
+artifact_id,name,era,significance,artifact_type
+1,Statue of Zeus,Ancient,Significance.HIGH,ArtifactType.SCULPTURE
+2,Venus de Milo,Ancient,Significance.HIGH,ArtifactType.SCULPTURE
+3,Rosetta Stone,Ancient,Significance.HIGH,ArtifactType.DOCUMENT
+4,Dead Sea Scrolls,Ancient,Significance.MEDIUM,ArtifactType.DOCUMENT
+5,Terracotta Army,Medieval,Significance.HIGH,ArtifactType.SCULPTURE
+7,Starry Night,Modern,Significance.MEDIUM,ArtifactType.PAINTING
+8,The Scream,Modern,Significance.MEDIUM,ArtifactType.PAINTING
+9,The Thinker,Modern,Significance.LOW,ArtifactType.SCULPTURE
+10,David,Renaissance,Significance.HIGH,ArtifactType.SCULPTURE
+6,Mona Lisa,Renaissance,Significance.HIGH,ArtifactType.PAINTING
+7,awes,Modern,Significance.LOW,ArtifactType.PAINTING
