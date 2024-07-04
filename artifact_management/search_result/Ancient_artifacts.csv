@@ -1,0 +1,4 @@
+artifact_id,name,era,significance,artifact_type
+2,Venus de Milo,Ancient,Significance.HIGH,ArtifactType.SCULPTURE
+3,Rosetta Stone,Ancient,Significance.HIGH,ArtifactType.DOCUMENT
+4,Dead Sea Scrolls,Ancient,Significance.MEDIUM,ArtifactType.DOCUMENT

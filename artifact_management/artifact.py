@@ -15,8 +15,14 @@ class Artifact:
         self.artifact_id = artifact_id
         self.name = name
         self.era = era
-        self.significance = Significance[significance]
-        self.artifact_type = ArtifactType[artifact_type]
+        if isinstance(significance, Significance):
+            self.significance = significance
+        else:
+            self.significance = Significance[significance]
+        if isinstance(artifact_type, ArtifactType):
+            self.artifact_type = artifact_type
+        else:
+            self.artifact_type = ArtifactType[artifact_type]
 
     def __repr__(self):
         return f"Artifact(ID={self.artifact_id}, Name={self.name}, Era={self.era}, Significance={self.significance.name}, Type={self.artifact_type.name})"
@@ -37,4 +43,3 @@ class Artifact:
                     if self.artifact_type.value < other.artifact_type.value:
                         return True
         return False
-
