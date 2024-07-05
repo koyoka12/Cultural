@@ -2,7 +2,7 @@
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./Cultural_new",
+        "./test",
         "-p",
         "test_*.py"
     ],

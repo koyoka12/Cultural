@@ -2,5 +2,6 @@ group_id,arrival_time,reservation_priority,preference
 1,1900-01-01 09:00:00,Significance.HIGH,
 2,1900-01-01 09:30:00,Significance.MEDIUM,
 3,1900-01-01 10:00:00,Significance.LOW,
-4,1900-01-01 11:00:00,Significance.MEDIUM,
 5,1900-01-01 10:30:00,Significance.HIGH,
+4,1900-01-01 11:00:00,Significance.MEDIUM,
+15,1900-01-01 12:00:00,Significance.LOW,MODERN
